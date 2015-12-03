@@ -20,7 +20,7 @@ namespace TowerDefence
         Texture2D tex;
         Texture2D bulletTex;
         Texture2D towerTex;
-        Tower tower;
+        TowerNormal tower;
         Monster monster;
         List<Monster> monsters = new List<Monster>();
         float x;
@@ -64,7 +64,7 @@ namespace TowerDefence
             bulletTex = Content.Load<Texture2D>(@"bullet");
             towerTex = Content.Load<Texture2D>(@"Finishflag_sprite");
             monster = new Monster(tex, new Vector2(0, 0));
-            tower = new Tower(new Vector2(100, 100), towerTex, bulletTex);
+            tower = new TowerNormal(new Vector2(100, 100), towerTex, bulletTex);
             
 
 

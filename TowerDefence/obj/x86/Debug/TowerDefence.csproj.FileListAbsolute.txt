@@ -24,6 +24,5 @@ C:\Users\simon_000\documents\visual studio 2013\Projects\TowerDefence\TowerDefen
 C:\Users\simon_000\documents\visual studio 2013\Projects\TowerDefence\TowerDefence\bin\Windows\Debug\SharpDX.XInput.xml
 C:\Users\simon_000\documents\visual studio 2013\Projects\TowerDefence\TowerDefence\bin\Windows\Debug\SharpDX.RawInput.xml
 C:\Users\simon_000\documents\visual studio 2013\Projects\TowerDefence\TowerDefence\bin\Windows\Debug\SharpDX.Direct3D9.xml
-C:\Users\simon_000\documents\visual studio 2013\Projects\TowerDefence\TowerDefence\obj\x86\Debug\TowerDefence.csprojResolveAssemblyReference.cache
 C:\Users\simon_000\documents\visual studio 2013\Projects\TowerDefence\TowerDefence\obj\x86\Debug\TowerDefence.exe
 C:\Users\simon_000\documents\visual studio 2013\Projects\TowerDefence\TowerDefence\obj\x86\Debug\TowerDefence.pdb
