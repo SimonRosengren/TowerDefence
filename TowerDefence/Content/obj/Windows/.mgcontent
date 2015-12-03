@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/Users/simon_000/documents/visual studio 2013/Projects/TowerDefence/TowerDefence/Content/Jump_Monster_Sprite.png</File>
+    <File>C:/Users/simon_000/documents/visual studio 2013/Projects/TowerDefence/TowerDefence/Content/Bullet.png</File>
+    <File>C:/Users/simon_000/documents/visual studio 2013/Projects/TowerDefence/TowerDefence/Content/Finishflag_sprite.png</File>
+  </SourceFiles>
+</SourceFileCollection>
