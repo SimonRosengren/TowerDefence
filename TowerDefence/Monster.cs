@@ -9,24 +9,24 @@ using Spline;
 
 namespace TowerDefence
 {
-    class Monster
+    class Monster : GameObject
     {
-        Texture2D tex;
-        public Vector2 pos;
         public Rectangle hitBox;
-        
-        public Monster(Texture2D tex, Vector2 startPos)
+        public float velocity;
+        public Monster(Texture2D tex, Vector2 startPos) : base(startPos, tex)
         {
             this.pos = startPos;
             this.tex = tex;
+            this.velocity = 0;
             this.hitBox = new Rectangle((int)pos.X, (int)pos.Y, tex.Width, tex.Height);
         }
-        public void update(Vector2 dest)            //Skicka med coordinates från splineklassen
+        public void update(Vector2 dest, float t)            //Skicka med coordinates från splineklassen
         {
-            pos = dest;
-            this.hitBox = new Rectangle((int)pos.X, (int)pos.Y, tex.Width, tex.Height);
+            this.pos = dest;
+            this.hitBox = new Rectangle((int)this.pos.X, (int)this.pos.Y, tex.Width, tex.Height);
+            velocity += t * 100;
         }
-        public void Draw(SpriteBatch sb)
+        public override void Draw(SpriteBatch sb)
         {
             sb.Draw(tex, pos, Color.White);
         }

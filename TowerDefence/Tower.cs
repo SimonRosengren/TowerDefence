@@ -8,23 +8,24 @@ using Microsoft.Xna.Framework.Input;
 
 namespace TowerDefence
 {
-    abstract class Tower
+    abstract class Tower : GameObject
     {
-        Rectangle rangeBox;
-        Rectangle hitBox;
-        Vector2 pos;
-        protected List<Bullet> bullets;
-        Texture2D tex;
+        public Rectangle rangeBox;
+        protected Rectangle hitBox;
+        protected Texture2D bulletTex;
+        public int ? target;
+        public bool hasTarget;
 
-        public Tower(Vector2 pos, Texture2D tex)
+        public Tower(Vector2 pos, Texture2D tex, Texture2D bulletTex) : base(pos, tex)
         {
-            this.pos = pos;
-            bullets = new List<Bullet>();
+            this.bulletTex = bulletTex;
+            this.hasTarget = false;
+            target = null;
         }
-        public abstract void Update(Vector2 target, float t) { }
-        public abstract void shoot(Vector2 target, float t) { }
-        public abstract void reload(float t) { }
-        public abstract void Draw(SpriteBatch sb) { }
+        public abstract void Update(Vector2 target, float t);
+        public abstract void shoot(Vector2 target, float t);
+        public abstract void reload(float t);
+        public override void Draw(SpriteBatch sb) { }
 
     }
 }
