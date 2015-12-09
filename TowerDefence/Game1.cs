@@ -20,7 +20,7 @@ namespace TowerDefence
         Texture2D bulletTex;
         Texture2D towerTex;
 
-        float x;
+
 
         LevelManager levelManager;
 
@@ -36,6 +36,7 @@ namespace TowerDefence
         }
         protected override void Initialize()
         {
+            IsMouseVisible = true;
             graphics.PreferredBackBufferHeight = 800;
             graphics.ApplyChanges();
             base.Initialize();
@@ -48,7 +49,7 @@ namespace TowerDefence
 
             monsterTex = Content.Load<Texture2D>(@"Jump_Monster_Sprite");
             bulletTex = Content.Load<Texture2D>(@"bullet");
-            towerTex = Content.Load<Texture2D>(@"Finishflag_sprite");
+            towerTex = Content.Load<Texture2D>(@"bullet");
 
 
             levelManager = new LevelManager(GraphicsDevice, monsterTex, towerTex, bulletTex);

@@ -5,19 +5,15 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
 namespace TowerDefence
 {
-    class TowerNormal : Tower
+    class TowerAoe : Tower
     {
-        
-    
+                
 
 
-        public TowerNormal(Vector2 pos, Texture2D tex, Texture2D bulletTex) : base (pos, tex, bulletTex)
+        public TowerAoe(Vector2 pos, Texture2D tex, Texture2D bulletTex) : base (pos, tex, bulletTex)
         {
-            this.timeToReload = 0.3f;
-            this.dmg = 100;
            
             this.hitBox = new Rectangle((int)pos.X - 200, (int)pos.Y - 200, tex.Width + 400, tex.Height + 400);
 
@@ -25,13 +21,17 @@ namespace TowerDefence
         }
         public override void Update(Vector2 target, float t)
         {
-            
+            if (hasTarget)
+            {
+                
+            }
           
         }
         public override void shoot(Vector2 target, float t)
         {
-           // Bullet bullet = new Bullet(pos, target, bulletTex);
+
         }
+
         public override void Draw(SpriteBatch sb)
         {
             sb.Draw(tex, pos, Color.White);

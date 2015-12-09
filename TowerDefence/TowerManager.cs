@@ -24,6 +24,10 @@ namespace TowerDefence
         public void Update(float time)
         {
             bulletManager.Update(time);
+            foreach (Tower tower in towers)
+            {
+                tower.reload(time);
+            }
         }
         public void Draw(SpriteBatch sb)
         {
@@ -33,9 +37,13 @@ namespace TowerDefence
             }
             bulletManager.Draw(sb);
         }
-        public void addTower(Vector2 pos)
+        public void addNormalTower(Vector2 pos)
         {
             towers.Add(new TowerNormal(pos, this.tex, this.bulletTex));
+        }
+        public void addSlowTower(Vector2 pos)
+        {
+            towers.Add(new TowerSlow(pos, this.tex, this.bulletTex));
         }
         public void checkForTarget(Rectangle monsterHitBox, int monsterIndex, float time) //gör det här för varje monster 
         {
@@ -44,34 +52,34 @@ namespace TowerDefence
                 
                 if (monsterHitBox.Intersects(t.rangeBox) && !t.hasTarget)
                 {
-                    
-                    
+                    //Locking target
+
                     t.target = monsterIndex;
                     t.hasTarget = true;
-                    
                 }
-                if (t.hasTarget && t.target == monsterIndex && monsterHitBox.Intersects(t.rangeBox) && t.target != null)
+                if (t.hasTarget && t.target == monsterIndex && monsterHitBox.Intersects(t.rangeBox) && t.target != null && !t.isReloading)
                 {
-                    //t.shoot(new Vector2(monsterHitBox.X, monsterHitBox.Y), time);
-
-
-                    Console.WriteLine("Target: " + monsterIndex);
-
-                    bulletManager.addBullet(t.getPos(), new Vector2(monsterHitBox.X, monsterHitBox.Y), bulletTex, monsterIndex);
+                    //shooting
+                    t.isReloading = true;
+                    Bullet b = new Bullet(t.getPos(), new Vector2(monsterHitBox.X, monsterHitBox.Y), bulletTex, monsterIndex, t.dmg);
+                    b.slowEffect = t.slowEffect;
+                    bulletManager.addBullet(b);
                 }
-                else if  (t.target != null && t.target == monsterIndex && !monsterHitBox.Intersects(t.rangeBox))
+                else if (t.target != null && t.target == monsterIndex && !monsterHitBox.Intersects(t.rangeBox))
                 {
-                    //Console.WriteLine("Target lost");
+                    //loosing target
                     t.hasTarget = false;
                     t.target = null;
                 }
+  
+
             }
         }
         public void updateBulletTargets()
         {
 
         }
-        
+
 
     }
 }

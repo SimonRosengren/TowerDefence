@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>C:/Users/simon_000/documents/visual studio 2013/Projects/TowerDefence/TowerDefence/Content/Bullet.png</SourceFile>
-  <SourceTime>2015-11-18T08:46:48.5506335+01:00</SourceTime>
+  <SourceTime>2015-12-09T14:35:47.9790663+01:00</SourceTime>
   <DestFile>C:/Users/simon_000/documents/visual studio 2013/Projects/TowerDefence/TowerDefence/Content/bin/Windows/Bullet.xnb</DestFile>
-  <DestTime>2015-12-02T17:31:45.9530272+01:00</DestTime>
+  <DestTime>2015-12-09T14:35:53.6902931+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2015-04-29T19:14:44+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

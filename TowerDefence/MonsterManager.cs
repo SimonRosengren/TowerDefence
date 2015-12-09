@@ -24,6 +24,7 @@ namespace TowerDefence
             {
                 m.update(path.GetPos(path.beginT + m.velocity), t);
             }
+            clearMonsters();
         }
         public void addMonster(Vector2 startPos)
         {
@@ -34,6 +35,16 @@ namespace TowerDefence
             foreach (Monster m in monsters)
             {
                 m.Draw(sb);
+            }
+        }
+        public void clearMonsters()
+        {
+            for (int i = 0; i < monsters.Count; i++)
+            {
+                if (monsters[i].health < 0)
+                {
+                    monsters.RemoveAt(i);
+                }
             }
         }
     }

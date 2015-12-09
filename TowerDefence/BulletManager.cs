@@ -24,9 +24,9 @@ namespace TowerDefence
                 bullet.update();
             }
         }
-        public void addBullet(Vector2 towerPos, Vector2 monsterPos, Texture2D tex, int targetIndex)
+        public void addBullet(/*Vector2 towerPos, Vector2 monsterPos, Texture2D tex, int targetIndex*/Bullet b)
         {
-            bullets.Add(new Bullet(towerPos, monsterPos, tex, targetIndex));
+            bullets.Add(b);
         }
         public void Draw(SpriteBatch sb)
         {
