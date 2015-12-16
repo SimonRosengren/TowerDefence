@@ -20,6 +20,7 @@ namespace TowerDefence
         Texture2D bulletTex;
         Texture2D towerTex;
         Texture2D bottomBarBG;
+        SpriteFont HUDfont;
 
 
 
@@ -53,9 +54,10 @@ namespace TowerDefence
             bulletTex = Content.Load<Texture2D>(@"bullet");
             towerTex = Content.Load<Texture2D>(@"Finishflag_sprite");
             bottomBarBG = Content.Load<Texture2D>(@"barBG");
+            HUDfont = Content.Load<SpriteFont>(@"HUDfont");
 
 
-            levelManager = new LevelManager(GraphicsDevice, monsterTex, towerTex, bulletTex, bottomBarBG);
+            levelManager = new LevelManager(GraphicsDevice, monsterTex, towerTex, bulletTex, bottomBarBG, Window.ClientBounds.Width, Window.ClientBounds.Height, spriteBatch, HUDfont);
         }
 
 

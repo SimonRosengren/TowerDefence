@@ -17,6 +17,7 @@ namespace TowerDefence
         public float health;
         public float speed;
         public bool slowEffect;
+        public int value;
         public Monster(Texture2D tex, Vector2 startPos) : base(startPos, tex)
         {
             this.health = 1000;
@@ -25,6 +26,7 @@ namespace TowerDefence
             this.pos = startPos;
             this.slowEffect = false;
             this.tex = tex;
+            this.value = 10;
             this.velocity = 0;
             this.hitBox = new Rectangle((int)pos.X, (int)pos.Y, tex.Width, tex.Height);
         }

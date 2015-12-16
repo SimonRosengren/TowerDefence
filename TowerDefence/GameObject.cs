@@ -10,7 +10,7 @@ namespace TowerDefence
 {
     abstract class GameObject
     {
-        protected Texture2D tex;
+        public Texture2D tex;
         protected Vector2 pos;
         public GameObject(Vector2 pos, Texture2D tex)
         {

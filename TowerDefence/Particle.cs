@@ -35,11 +35,11 @@ namespace TowerDefence
             {
                 this.isAlive = false;
             }
-            if (Vector2.Distance(startPos, pos) > 200)
+            if (Vector2.Distance(startPos, pos) > 100)
             {
-                timeToLive = 0;
+                
             }
-            pos += dir * speed;
+            pos += dir * (speed - Vector2.Distance(startPos, pos) * 0.1f);
             hitBox = new Rectangle((int)pos.X, (int)pos.Y, tex.Width, tex.Height);
         }
  

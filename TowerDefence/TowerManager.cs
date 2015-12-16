@@ -10,7 +10,7 @@ namespace TowerDefence
 {
     class TowerManager
     {
-        Texture2D tex;
+        public Texture2D tex;
         Texture2D bulletTex;
         public List<Tower> towers;
         public BulletManager bulletManager;
@@ -31,10 +31,6 @@ namespace TowerDefence
         }
         public void Draw(SpriteBatch sb)
         {
-            foreach (Tower t in towers)
-            {
-                t.Draw(sb);
-            }
             bulletManager.Draw(sb);
         }
         public void addNormalTower(Vector2 pos)
@@ -81,6 +77,11 @@ namespace TowerDefence
   
 
             }
+        }
+        public Tower getTempNormalTower(Vector2 pos)
+        {
+            Tower tempTower = new TowerNormal(pos, this.tex, this.bulletTex);
+            return tempTower;
         }
         public void updateBulletTargets()
         {

@@ -12,6 +12,7 @@ namespace TowerDefence
     class MonsterManager
     {
         Texture2D tex;
+        public int cash; //För att denna handler vet vad monstret är värt och när det dör
         public List<Monster> monsters;
         public MonsterManager(Texture2D tex)
         {
@@ -43,7 +44,9 @@ namespace TowerDefence
             {
                 if (monsters[i].health < 0)
                 {
+                    cash += monsters[i].value;
                     monsters.RemoveAt(i);
+                    
                 }
             }
         }

@@ -25,10 +25,19 @@ namespace TowerDefence
         int currentWave;
         float waveTimer = 0;
 
+        SpriteFont HUDfont;
+
+
+        GraphicsDevice gd;
+        SpriteBatch sb;
+        RenderTarget2D renderTarget;
+
+
+
         enum towerBuildSelection { none, NormalTower, SlowTower}
         towerBuildSelection currentTowerBuildSelection = towerBuildSelection.none;
 
-        public LevelManager(GraphicsDevice graphicDevice, Texture2D monsterTex, Texture2D towerTex, Texture2D bulletTex, Texture2D bottomBarBG)
+        public LevelManager(GraphicsDevice graphicDevice, Texture2D monsterTex, Texture2D towerTex, Texture2D bulletTex, Texture2D bottomBarBG, int windowWidth, int windowHeight, SpriteBatch sb, SpriteFont HUDfont)
         {
             menuBar = new actionBar(bottomBarBG, bulletTex); //ändra tex
             kmReader = new KeyMouseReader();
@@ -39,6 +48,12 @@ namespace TowerDefence
             this.towerManager = new TowerManager(towerTex, bulletTex);
             this.currentWave = 0;
             particleHandler = new ParticleHandler(bulletTex);
+            this.gd = graphicDevice;
+            this.sb = sb;
+            this.HUDfont = HUDfont;
+
+            this.renderTarget = new RenderTarget2D(graphicDevice, windowWidth, windowHeight);
+
             
             //För test           
             towerManager.addNormalTower(new Vector2(120, 120));
@@ -46,6 +61,12 @@ namespace TowerDefence
             towerManager.addSlowTower(new Vector2(650, 420));
             towerManager.addSlowTower(new Vector2(650, 620));
             loadLevel();
+
+
+            //Uppdaterar renderTarget här!!
+            updateRenderTarget();
+
+
 
 
 
@@ -99,12 +120,19 @@ namespace TowerDefence
         }
         public void Draw(SpriteBatch sb)
         {
-            path.Draw(sb);
+
             path.DrawPoints(sb);
-            towerManager.Draw(sb);
+            towerManager.Draw(sb); //ritar endast ut skott 
+            sb.Draw(renderTarget, Vector2.Zero, Color.White);
             monsterManager.Draw(sb);
             particleHandler.Draw(sb);
             menuBar.Draw(sb);
+            if (currentTowerBuildSelection == towerBuildSelection.NormalTower)
+            {
+                sb.Draw(towerManager.tex, Mouse.GetState().Position.ToVector2(), Color.White);
+            }
+            sb.DrawString(HUDfont, "" + monsterManager.cash, Vector2.Zero, Color.Black);
+
         }
         public void updateBullets()
         {
@@ -134,7 +162,9 @@ namespace TowerDefence
                             monsterManager.monsters[k].slowEffect = true;
                             monsterManager.monsters[k].speed *= towerManager.bulletManager.bullets[i].slowEffect;
                             particleHandler.addNewParticleExplosion(monsterManager.monsters[k].getPos());
-                        }                      
+                            
+                        }
+                        
                         towerManager.bulletManager.bullets.RemoveAt(i);
                         break; //Plockar annars bort skott och förstör sedan loopen då antalet skott ändras under loopens gång
                     }
@@ -150,6 +180,7 @@ namespace TowerDefence
                 if (point != null)
                 {
                     path.SetPos((int)point, Mouse.GetState().Position.ToVector2());
+                    updateRenderTarget();
                 }
             }
             //Tower Selection
@@ -161,6 +192,7 @@ namespace TowerDefence
                     {
                         selectedTower = i;
                         towerManager.towers[i].isSelected = true;
+                        updateRenderTarget();
                     }
                 }
                 if (menuBar.getButtonPressed(Mouse.GetState().Position.ToVector2()) == 1)
@@ -176,11 +208,16 @@ namespace TowerDefence
                 }
                 if (currentTowerBuildSelection == towerBuildSelection.NormalTower)
                 {
-                    towerManager.addNormalTower(Mouse.GetState().Position.ToVector2());
+                    if (canPlace(towerManager.getTempNormalTower(Mouse.GetState().Position.ToVector2())))
+                    {
+                        towerManager.addNormalTower(Mouse.GetState().Position.ToVector2());
+                        updateRenderTarget();   
+                    }
                 }
                 if (currentTowerBuildSelection == towerBuildSelection.SlowTower)
                 {
                     towerManager.addSlowTower(Mouse.GetState().Position.ToVector2());
+                    updateRenderTarget();
                 }
 
 
@@ -196,9 +233,39 @@ namespace TowerDefence
                 foreach (Tower t in towerManager.towers)
                 {
                     t.isSelected = false;
+                    updateRenderTarget();
                 }
             }
 
+        }
+        public void updateRenderTarget()
+        {
+            gd.SetRenderTarget(renderTarget);
+            gd.Clear(Color.Transparent);
+
+            sb.Begin();
+            path.Draw(sb);
+            foreach (Tower t in towerManager.towers)
+            {
+                t.Draw(sb);
+            }
+
+            sb.End();
+
+            gd.SetRenderTarget(null);
+        }
+        public bool canPlace(GameObject g)
+        {
+            Color[] pixels = new Color[g.tex.Width * g.tex.Height];
+            Color[] pixels2 = new Color[g.tex.Width * g.tex.Height];
+            g.tex.GetData<Color>(pixels2);
+            renderTarget.GetData(0, new Rectangle((int)g.getPos().X, (int)g.getPos().Y, g.tex.Width, g.tex.Height), pixels, 0, pixels.Length);
+            for (int i = 0; i < pixels.Length; ++i)
+            {
+                if (pixels[i].A > 0.0f && pixels2[i].A > 0.0f)
+                    return false;
+            }
+            return true;
         }
 
         
