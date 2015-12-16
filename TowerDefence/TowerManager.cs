@@ -45,6 +45,13 @@ namespace TowerDefence
         {
             towers.Add(new TowerSlow(pos, this.tex, this.bulletTex));
         }
+        public void requestToBuildTower(Tower t)
+        {
+            //Pixelperfekta från föreläsning
+
+
+
+        }
         public void checkForTarget(Rectangle monsterHitBox, int monsterIndex, float time) //gör det här för varje monster 
         {
             foreach (Tower t in towers)

@@ -13,27 +13,33 @@ namespace TowerDefence
         public Rectangle hitBox;
         Vector2 dir;
         Vector2 pos;
+        Vector2 startPos;
         Texture2D tex;
-        int speed;
-        public float timeToLive;
+        public float speed;
+        public double timeToLive;
         public bool isAlive;
-        public Particle(Texture2D tex, Vector2 pos, Vector2 dir, int speed)
+        public Particle(Texture2D tex, Vector2 pos, Vector2 dir, int speed, double timeToLive)
         {
             this.tex = tex;
             this.pos = pos;
             this.dir = dir;
             this.speed = speed;
-            this.timeToLive = 1f;
+            this.timeToLive = timeToLive;
             this.isAlive = true;
+            startPos = pos;
         }
         public void update(float t)
         {
             timeToLive -= t;
-            if (timeToLive < 0)
+            if (timeToLive <= 0)
             {
                 this.isAlive = false;
             }
-            pos += dir * t * speed;
+            if (Vector2.Distance(startPos, pos) > 200)
+            {
+                timeToLive = 0;
+            }
+            pos += dir * speed;
             hitBox = new Rectangle((int)pos.X, (int)pos.Y, tex.Width, tex.Height);
         }
  

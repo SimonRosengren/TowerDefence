@@ -11,7 +11,7 @@ namespace TowerDefence
     abstract class Tower : GameObject
     {
         public Rectangle rangeBox;
-        protected Rectangle hitBox;
+        public Rectangle hitBox;
         protected Texture2D bulletTex;
         public int ? target;
         public bool hasTarget;
@@ -21,10 +21,13 @@ namespace TowerDefence
         public float reloadTimer;
         public bool isReloading;
         public float dmg;
+        public bool isSelected;
+        protected int lvl;
 
         public Tower(Vector2 pos, Texture2D tex, Texture2D bulletTex) : base(pos, tex)
         {
             reloadTimer = 10;
+            this.hitBox = new Rectangle((int)pos.X, (int)pos.Y, this.tex.Width, this.tex.Height);
             this.bulletTex = bulletTex;
             this.hasTarget = false;
             target = null;
@@ -32,10 +35,12 @@ namespace TowerDefence
             this.slowEffect = 1.0f;
             //this.reloading = false;
             this.timeToReload = 0.7f;
+            this.lvl = 1;
             this.dmg = 100;//determines how fast the tower shoots
         }
         public abstract void Update(Vector2 target, float t);
         public abstract void shoot(Vector2 target, float t);
+        public abstract void levelUp();
         public void reload(float t)
         {
             

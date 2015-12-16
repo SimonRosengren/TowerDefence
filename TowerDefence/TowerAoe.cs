@@ -27,6 +27,12 @@ namespace TowerDefence
             }
           
         }
+        public override void levelUp()
+        {
+            this.lvl++;
+            this.dmg *= lvl;
+
+        }
         public override void shoot(Vector2 target, float t)
         {
 

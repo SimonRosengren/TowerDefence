@@ -19,6 +19,7 @@ namespace TowerDefence
         Texture2D monsterTex;
         Texture2D bulletTex;
         Texture2D towerTex;
+        Texture2D bottomBarBG;
 
 
 
@@ -38,6 +39,7 @@ namespace TowerDefence
         {
             IsMouseVisible = true;
             graphics.PreferredBackBufferHeight = 800;
+            graphics.PreferredBackBufferHeight = 800;
             graphics.ApplyChanges();
             base.Initialize();
         }
@@ -49,10 +51,11 @@ namespace TowerDefence
 
             monsterTex = Content.Load<Texture2D>(@"Jump_Monster_Sprite");
             bulletTex = Content.Load<Texture2D>(@"bullet");
-            towerTex = Content.Load<Texture2D>(@"bullet");
+            towerTex = Content.Load<Texture2D>(@"Finishflag_sprite");
+            bottomBarBG = Content.Load<Texture2D>(@"barBG");
 
 
-            levelManager = new LevelManager(GraphicsDevice, monsterTex, towerTex, bulletTex);
+            levelManager = new LevelManager(GraphicsDevice, monsterTex, towerTex, bulletTex, bottomBarBG);
         }
 
 
@@ -64,7 +67,6 @@ namespace TowerDefence
         protected override void Update(GameTime gameTime)
         {
             levelManager.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
-
             base.Update(gameTime);
         }
 

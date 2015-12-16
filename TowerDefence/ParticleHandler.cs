@@ -22,12 +22,12 @@ namespace TowerDefence
         public void addNewParticleExplosion(Vector2 pos)
         {
             
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < 5000; i++)
             {
                 int multiplyerX = 1;
                 int multiplyerY = 1;
                 int speed;
-                speed = rnd.Next(50, 500);
+                speed = rnd.Next(1, 7);
                 if (rnd.Next(0, 2) == 0)
                 {
                     multiplyerX = -1;
@@ -36,8 +36,7 @@ namespace TowerDefence
                 {
                     multiplyerY = -1;
                 }
-
-                Particle p = new Particle(tex, pos, new Vector2((float)rnd.NextDouble() * multiplyerX, (float)rnd.NextDouble() * multiplyerY), speed);
+                Particle p = new Particle(tex, pos, new Vector2((float)rnd.NextDouble() * multiplyerX, (float)rnd.NextDouble() * multiplyerY), speed, rnd.NextDouble());
                 particles.Add(p);
             }
 
@@ -67,7 +66,19 @@ namespace TowerDefence
         {
             foreach (Particle p in particles)
             {
-                sb.Draw(tex, p.hitBox, Color.DeepSkyBlue * p.timeToLive);
+                if (p.speed < 3)
+                {
+                    sb.Draw(tex, p.hitBox, Color.Red * (float)p.timeToLive);
+                }
+                if (p.speed > 3 && p.speed < 5)
+                {
+                    sb.Draw(tex, p.hitBox, Color.Orange * (float)p.timeToLive);
+                }
+                if (p.speed > 5)
+                {
+                    sb.Draw(tex, p.hitBox, Color.Yellow * (float)p.timeToLive);
+                }
+                
             }
         }
     }

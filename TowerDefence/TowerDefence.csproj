@@ -38,8 +38,10 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="actionBar.cs" />
     <Compile Include="Bullet.cs" />
     <Compile Include="BulletManager.cs" />
+    <Compile Include="KeyMouseReader.cs" />
     <Compile Include="ParticleHandler.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="GameHandler.cs" />
@@ -50,6 +52,7 @@
     <Compile Include="Particle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RenderTargetHandler.cs" />
     <Compile Include="Tower.cs" />
     <Compile Include="TowerAoe.cs" />
     <Compile Include="TowerManager.cs" />
@@ -67,6 +70,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Bullet.png" />
+    <Content Include="Content\Finishflag_sprite.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>

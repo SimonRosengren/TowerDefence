@@ -13,13 +13,13 @@ namespace TowerDefence
         
     
 
-
+        
         public TowerNormal(Vector2 pos, Texture2D tex, Texture2D bulletTex) : base (pos, tex, bulletTex)
         {
             this.timeToReload = 0.3f;
             this.dmg = 100;
            
-            this.hitBox = new Rectangle((int)pos.X - 200, (int)pos.Y - 200, tex.Width + 400, tex.Height + 400);
+
 
             this.rangeBox = new Rectangle((int)pos.X - 200, (int)pos.Y - 200, tex.Width + 400, tex.Height + 400);
         }
@@ -28,17 +28,24 @@ namespace TowerDefence
             
           
         }
+        public override void levelUp()
+        {
+            this.lvl++;
+            this.dmg *= lvl;
+            
+        }
         public override void shoot(Vector2 target, float t)
         {
            // Bullet bullet = new Bullet(pos, target, bulletTex);
         }
         public override void Draw(SpriteBatch sb)
         {
-            sb.Draw(tex, pos, Color.White);
-            /*for (int i = 0; i < bullets.Count; i++)
+            if (isSelected)
             {
-                bullets[i].Draw(sb);
-            }*/
+                sb.Draw(tex, pos, Color.Black);
+            }
+            else
+                sb.Draw(tex, pos, Color.White);
         }
 
     }
